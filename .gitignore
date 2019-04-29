@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+
+logs/
+src/main/java/me/mrdoc/fortnite/discordbotfortnite/experimental/
+src/test/
+target/
+CoreTest.java
+*.iml

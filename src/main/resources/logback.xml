@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is not essential but helps to get you used to logback -->
+<!-- Put this file under src/main/resources folder -->
+
+<configuration scan="true" scanPeriod="1 seconds">
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/bot.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %-40.40logger{39} : %msg%n</Pattern>
+        </encoder>
+        <prudent>true</prudent>
+    </appender>
+
+    <!-- Configure the Sentry appender, overriding the logging threshold to the WARN level -->
+    <appender name="SENTRY" class="io.sentry.logback.SentryAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+    </appender>
+
+    <root level="ALL">
+        <appender-ref ref="CONSOLE"/>
+        <!-- <appender-ref ref="FILE"/> -->
+        <appender-ref ref="SENTRY"/>
+    </root>
+
+    <logger name="org.apache" level="NONE"/>
+    <logger name="org.ehcache" level="INFO"/>
+    <logger name="discord4j" level="INFO"/>
+    <logger name="reactor" level="INFO"/>
+    <logger name="io.sentry" level="WARN"/>
+
+    <!-- HikariCP loggers -->
+    <logger name="com.zaxxer.hikari.pool.PoolBase" level="INFO"/>
+    <logger name="com.zaxxer.hikari.pool.HikariPool" level="INFO"/>
+    <logger name="com.zaxxer.hikari.HikariDataSource" level="INFO"/>
+
+    <!-- Avoid logger spam from apache -->
+    <logger name="org.apache" level="NONE"/>
+
+    <!-- Avoid logger spam from web socket -->
+    <logger name="httpclient" level="OFF"/>
+    <logger name="okhttp3" level="OFF"/>
+    <logger name="io.netty" level="INFO"/>
+
+    <!-- Avoid logger spam from web socket -->
+    <logger name="org.eclipse.jetty" level="OFF"/>
+
+    <!-- Configure c3p0 logger level -->
+    <logger name="com.mchange.v2.c3p0" level="WARN"/>
+    <logger name="com.mchange.v2.resourcepool.BasicResourcePool" level="OFF"/>
+    <logger name="com.mchange.v2.async.ThreadPoolAsynchronousRunner" level="OFF"/>
+    <logger name="com.mchange.v2.cfg.MConfig" level="OFF"/>
+    <logger name="com.mchange.v2.log.MLog" level="OFF"/>
+
+    <!-- Configure hibernate level -->
+    <logger name="org.hibernate" level="OFF"/>
+
+    <!-- Configure App level -->
+    <logger name="me.mrdoc.discord.dmrol.Core" level="INFO"/>
+
+</configuration>

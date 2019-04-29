@@ -1,0 +1,15 @@
+{
+  "name": "DMRolBOT",
+  "description": "Un BOT creado para enviar mensajes a roles.",
+  "repository": "https://github.com/Doc94/FortniteHispanoDiscord/",
+  "env": {
+    "TOKEN": {
+      "description": "Token del BOT.",
+      "required": true
+    },
+    "OPTIONAL_PARAMS": {
+      "description": "Otros parametros de arranque como -debug",
+      "required": false
+    }
+  }
+}
