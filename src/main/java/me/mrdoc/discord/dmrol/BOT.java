@@ -24,7 +24,7 @@ public class BOT {
 
     public BOT(String token) {
         DiscordClientBuilder clientBuilder = new DiscordClientBuilder(token);
-        clientBuilder.setInitialPresence(Presence.online(Activity.playing("Enviar Avisos")));
+        clientBuilder.setInitialPresence(Presence.online(Activity.playing(System.getProperty("DISCORD_PRESENCE_TEXT","Enviando Avisos"))));
         client = clientBuilder.build();
 
         client.getEventDispatcher().on(ReadyEvent.class)
